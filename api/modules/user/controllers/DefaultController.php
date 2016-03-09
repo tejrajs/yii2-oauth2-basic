@@ -49,7 +49,7 @@ class DefaultController extends Controller
 	public function actionLogin()
 	{
 		if (!\Yii::$app->user->isGuest) {
-			return $this->redirect(['/user/login']);
+			return $this->redirect(['/user/check']);
 		}
 	
 		$model = new LoginForm();

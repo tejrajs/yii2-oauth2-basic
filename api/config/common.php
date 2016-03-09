@@ -46,18 +46,25 @@ $config =  [
     			'class' => 'api\modules\oauth2server\Module',
     			'tokenParamName' => 'accessToken',
     			'tokenAccessLifetime' => 3600 * 24,
+    			'allowImplicit' =>true,
     			'storageMap' => [
     					'user_credentials' => 'api\models\User',
     			],
+//     			'server' =>[
+//     				'class' => 'OAuth2\Server',
+//     					'allow_implicit' => true,
+//     			],
     			'grantTypes' => [
     					'user_credentials' => [
     							'class' => 'OAuth2\GrantType\UserCredentials',
+    					],
+    					'authorization_code' => [
+    							'class' => 'OAuth2\GrantType\AuthorizationCode',
     					],
     					'refresh_token' => [
     							'class' => 'OAuth2\GrantType\RefreshToken',
     							'always_issue_new_refresh_token' => true
     					]
-    	
     			]
     	],
 		'v1' => [

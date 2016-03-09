@@ -100,3 +100,9 @@ return [
 - Yii won't create the database for you, this has to be done manually before you can access it.
 - Check and edit the other files in the `config/` directory to customize your application as required.
 - Refer to the README in the `tests` directory for information specific to basic application tests.
+
+Test 
+-------------
+
+http://api.test/user/authorize?response_type=code&client_id=testclient&redirect_uri=http://api.test/user/index
+http://api.test/user/authorize?response_type=token&client_id=testclient&redirect_uri=http://api.test/user/index

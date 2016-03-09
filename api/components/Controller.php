@@ -9,7 +9,31 @@
 
 namespace api\components;
 
+use yii\helpers\ArrayHelper;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
+use api\modules\oauth2server\filters\ErrorToExceptionFilter;
+use api\modules\oauth2server\filters\auth\CompositeAuth;
+
 class Controller extends \yii\rest\Controller
 {
-	use \api\components\traits\ControllersCommonTrait;
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return ArrayHelper::merge(parent::behaviors(), [
+				'authenticator' => [
+						'class' => CompositeAuth::className(),
+						'authMethods' => [
+								['class' => HttpBearerAuth::className()],
+								['class' => QueryParamAuth::className(), 'tokenParam' => 'accessToken'],
+						]
+				],
+				'exceptionFilter' => [
+						'class' => ErrorToExceptionFilter::className()
+				],
+		]);
+	}
+	//use \api\components\traits\ControllersCommonTrait;
 }
